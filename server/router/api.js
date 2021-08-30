@@ -20,7 +20,7 @@ router.post('/getImages',async (req, res, next) => {
         let rescontent = req.body
         rescontent["imageLinks"] = []
         rescontent.youtubeLinks.forEach( link => {
-            rescontent.imageLinks.push(`https://i.ytimg.com/vi/${link.split("=")[1].split("?")[0]}/maxresdefault.jpg`)
+            rescontent.imageLinks.push(`https://i.ytimg.com/vi/${link.split("=")[1].split("&")[0].split("?")[0]}/maxresdefault.jpg`)
         })
 
         if(req.body.email){
