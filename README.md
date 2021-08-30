@@ -4,7 +4,7 @@ Input list of youtube links and receive an email, with images packed in an zip, 
 
 # Installation / Usage
 ```bash
-Git clone https://github.com/Oskar1504/farm-together-api.git
+Git clone https://github.com/Oskar1504/yt-bulk-thumbnailgrabber-api.git
 npm install
 ```
 Edit config.json
