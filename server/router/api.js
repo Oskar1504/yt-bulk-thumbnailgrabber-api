@@ -20,8 +20,7 @@ router.post('/getImages',async (req, res, next) => {
         let rescontent = req.body
         rescontent["imageLinks"] = []
         rescontent.youtubeLinks.forEach( link => {
-            link = link.split("?")[0]
-            rescontent.imageLinks.push(`https://i.ytimg.com/vi/${link.split("=")[1]}/maxresdefault.jpg`)
+            rescontent.imageLinks.push(`https://i.ytimg.com/vi/${link.split("=")[1].split("?")[0]}/maxresdefault.jpg`)
         })
 
         if(req.body.email){
@@ -30,6 +29,7 @@ router.post('/getImages',async (req, res, next) => {
 
             let img = zip.folder("images")
             for (const link of rescontent.imageLinks) {
+                // converts image url to base64 string => https://stackoverflow.com/a/52648030/14077167
                 let image = await axios.get(link, {responseType: 'arraybuffer'});
                 img.file(link.split("/").reverse()[1] + ".png",  image.data, {base64: true});
             }
@@ -61,7 +61,6 @@ router.post('/getImages',async (req, res, next) => {
 
 
     }catch(e){
-        console.log(e)
         res.sendStatus(500)
     }
 });
